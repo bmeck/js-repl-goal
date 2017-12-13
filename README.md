@@ -2,6 +2,9 @@
 
 For all examples, a single input passed to the REPL will be represented by lines prefixed by `> ` and output from the REPL will be represented by lines prefixed by `< `.
 
+* [V8 Issue](https://bugs.chromium.org/p/v8/issues/detail?id=6903)
+* [Related Node PR](https://github.com/nodejs/node/pull/17285)
+
 ## Grammar Intentions
 
 These are a list of intended usages with grammar examples, production mechanics will be done at a later time.

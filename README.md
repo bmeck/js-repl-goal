@@ -13,7 +13,7 @@ These are a list of intended usages with grammar examples, production mechanics 
 < 1000
 ```
 
-* Reused environment record
+* Reused environment record that removes conflicting bindings between evluations
 
 ```js
 > let x = 1; let y = 'a'; x
@@ -35,11 +35,17 @@ These are a list of intended usages with grammar examples, production mechanics 
 < undefined
 ```
 
-* Sloppy Script by default
+* Sloppy by default
 
 ```js
 > with ({x: 1}) x
 < 1
+> let x = 2; x
+< 2
+> eval('let x =3; x')
+< 3
+> x
+< 3
 ```
 
 * Top level static import
@@ -63,7 +69,7 @@ These are a list of intended usages with grammar examples, production mechanics 
 < {"x": 1}
 ```
 
-* Strict mode DirectiveProlog
+* Strict mode DirectivePrologue
 
 ```js
 > "use strict"; with ({}) {}

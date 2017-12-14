@@ -65,13 +65,6 @@ These are a list of intended usages with grammar examples, production mechanics 
 < {"x": 1}
 ```
 
-* Object literal at start
-
-```js
-> {x: 1}
-< {"x": 1}
-```
-
 * Strict mode DirectivePrologue
 
 ```js

@@ -83,6 +83,16 @@ These are a list of intended usages with grammar examples, production mechanics 
 < 1
 ```
 
+### Productions
+
+```
+REPL :
+  Script [+await, +import]
+
+ScriptBody :
+  if (+import) ImportDeclaration
+```
+
 ## Semantic Intentions
 
 These are a list of intended spec changes by adding various things with new semantics.

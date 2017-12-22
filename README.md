@@ -94,18 +94,47 @@ These are a list of intended usages with grammar examples, production mechanics 
 
 These are a list of intended spec changes by adding various things with new semantics.
 
+1. Allow the repeated running of lines from scrollback history.
+
+Allow repeated running of the same input even if the input would collide with existing bindings on the REPL Environment Record.
+
+2. Abililty to remove bindings that have permanently been stuck in the TDZ.
+
+Allow cleaning up of bindings that have become stuck in a TDZ.
+
+3. Separation from the global scope.
+
+Allow a separation from the Global Environment in order to preserve logical consistency of how bindings work and giving a level of isolation to prevent leaving accidental bindings on the global when using tools such as a debugger.
+
+### REPL Lexical Environment
+
+A Lexical Environment with an outer environment reference to a Global Lexical Environment. A REPL environment's Environment Record may be shared amongst multiple REPL Input Records.
+
+### REPL Input Record
+
+A REPL Input Record encapsulates information about a repl input being evaluated. Each REPL Input Record contains the fields.
+
+#### REPL Input Record Fields
+
+Field Name | Value Type | Meaning
+---- | ---- | ----
+[[Realm]]	Realm Record | undefined | The realm within which this REPL Input Record was created. undefined if not yet assigned.
+[[Environment]]	Lexical Environment | a REPL Lexical Environment | The Lexical Environment containing the top level bindings for this REPL Input Record. This field is set when the REPL Input Record is instantiated.
+[[ECMAScriptCode]] | a Parse Node | The result of parsing the source text of this module using REPL as the goal symbol.
+[[HostDefined]] | Any, default value is undefined. | Field reserved for use by host environments that need to associate additional information with a REPL Input Record.
+
 ### REPL Environment Record
 
-An Environment Record that can remove lexical bindings as long as it does not have an associated execution context running.
+A REPL Environment Record is a declarative Environment Record that is used to represent the top-level scope of a REPL. It may be reused amongst multiple REPL Input Records.
 
 ### ParseREPLInput ( sourceText, realm, REPLEnvironment, hostDefined )
 
-Parses the sourceText and initializes all the lexical bindings declared in `sourceText` on REPLEnvironment, removing them before hand if needed to avoid errors from bindings already being defined.
+Parses the sourceText and initializes all the lexical bindings declared in `sourceText` on a REPL Environment, removing them before hand if needed to avoid errors from bindings already being defined. All lexical bindings declared in `sourceText` may be deleted.
 
-Returns a REPL Source Text Record.
+Returns a REPL Input Record.
 
-### REPL Source Text . Evaluate
+### REPL Input . Evaluate
 
-Evaluates a REPL Source Text Record. Prevents the REPL Environment Record it corresponds to from removing lexical bindings until it finishes, unless they are marked as deletable.
+Evaluates a REPL Input Record.
 
 Returns a Promise to the Completion Value. 

@@ -86,8 +86,9 @@ These are a list of intended usages with grammar examples, production mechanics 
 ### Productions
 
 ```
-REPL :
-  Script [+await, +import]
+REPL Input :
+  [lookahead = {] ObjectLiteral [+await]
+  [lookahead != {] Script [+await, +import]
 
 ScriptBody :
   if (+import) ImportDeclaration

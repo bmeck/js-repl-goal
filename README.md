@@ -87,11 +87,19 @@ These are a list of intended usages with grammar examples, production mechanics 
 
 ```
 REPL Input :
-  [lookahead = {] ObjectLiteral [+await]
-  [lookahead != {] Script [+await, +import]
+  [lookahead = {] ObjectLiteral[+Await]
+  [lookahead != {] Script[+Await, +Import]
 
-ScriptBody :
+ScriptBody:
+  ScriptItemList[?Await, ?Import]
+
+ScriptItemList:
+  ScriptItem[?Await, ?Import]
+  ScriptItemList ScriptItem[?Await, ?Import]
+
+ScriptItem:
   if (+import) ImportDeclaration
+  StatementListItem[~Yield, ?Await, ?Import, ~Return]
 ```
 
 ## Semantic Intentions

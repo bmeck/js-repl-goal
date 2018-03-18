@@ -110,7 +110,7 @@ These are a list of intended spec changes by adding various things with new sema
 
 Allow repeated running of the same input even if the input would collide with existing bindings on the REPL Environment Record.
 
-2. Abililty to remove bindings that have permanently been stuck in the TDZ.
+2. Abililty to remove bindings that have permanently been stuck in the Temporal Dead Zone.
 
 Allow cleaning up of bindings that have become stuck in a TDZ.
 
